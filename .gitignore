@@ -1,0 +1,11 @@
+Client/.vs/
+Client/Library/
+Client/Temp/
+Client/Logs/
+Client/UserSettings/
+Client/obj/
+*.db-wal
+Client/.vsconfig
+Client/*.csproj
+Client/Packages/packages-lock.json
+Client/Client.sln
