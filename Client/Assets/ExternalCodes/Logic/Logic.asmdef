@@ -2,7 +2,6 @@
     "name": "Logic",
     "rootNamespace": "",
     "references": [
-        "GUID:af43ebc6ab0b58c45a202a2644bbde31",
         "GUID:c37a1d8a89cb4d948b3e959c8aab0dd3"
     ],
     "includePlatforms": [],

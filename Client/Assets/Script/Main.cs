@@ -7,27 +7,34 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    void Start()
+    async void Start()
     {
-        LoadDll();
+        foreach (var d in CodeLoader.ExtraFiles)
+        {
+            var a = await LoadDll(d);
+            if (a == null)
+                return;
+        }
+        var assembly = await LoadDll("Logic.dll");
+        var t = assembly.GetType("MEBCGF.Startup");
+        var m = t.GetMethod("Start");
+        m.Invoke(null, null);
+        Log.Debug("Logic.dll loaded and started");
     }
 
     WWW www;
-    private async void LoadDll()
+    private async Task<Assembly> LoadDll(string d)
     {
-        www = new WWW(Path.Combine(Application.dataPath, "../", CodeLoader.DllOutputPath, "Logic.dll"));
+        www = new WWW(Path.Combine(Application.dataPath, "../", CodeLoader.DllOutputPath, d));
         tcs = new();
         var success = await tcs.Task;
         if (!success)
         {
-            Debug.LogError($"Load Logic.dll failed: {www.error}");
-            return;
+            Debug.LogError($"Load {d} failed: {www.error}");
+            return null;
         }
-        
-        var a = Assembly.Load(www.bytes);
-        var t = a.GetType("MEBCGF.Startup");
-        var m = t.GetMethod("Start");
-        m.Invoke(null, null);
+        Log.Debug($"Load extra dll {d} success");
+        return AppDomain.CurrentDomain.Load(www.bytes);
     }
 
     TaskCompletionSource<bool> tcs;

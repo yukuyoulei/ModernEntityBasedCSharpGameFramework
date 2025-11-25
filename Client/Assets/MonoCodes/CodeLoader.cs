@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class CodeLoader
 {
-    public const string DllOutputPath = "Temp/Bin/Debug/";
+    public const string DllOutputPath = "DllOutput/";
     public readonly static string[] ExtraFiles = new string[] { };
 
     public static Action UpdateAction;

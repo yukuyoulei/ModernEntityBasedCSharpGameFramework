@@ -9,27 +9,12 @@ public class OnGenerateCSProjectProcessor : AssetPostprocessor
 {
     public static string OnGeneratedCSProject(string path, string content)
     {
-        if (path.EndsWith("Base.csproj"))
-        {
-            content = content.Replace("<Compile Include=\"Assets\\ExternalCodes\\Base\\Empty.cs\" />", string.Empty);
-            content = content.Replace("<None Include=\"Assets\\ExternalCodes\\Base\\Base.asmdef\" />", string.Empty);
-            return GenerateCustomProject(path, content, @"..\Codes\Base\**\*.cs", @"LogicBase\**\*.cs");
-        }
         if (path.EndsWith("Logic.csproj"))
         {
             content = content.Replace("<RootNamespace />", "<RootNamespace>MEBCGF</RootNamespace>");
             content = content.Replace("<Compile Include=\"Assets\\ExternalCodes\\Logic\\Empty.cs\" />", string.Empty);
             content = content.Replace("<None Include=\"Assets\\ExternalCodes\\Logic\\Logic.asmdef\" />", string.Empty);
-            return GenerateCustomProject(path, content, @"Logic\**\*.cs");
-        }
-        foreach (var dll in CodeLoader.ExtraFiles)
-        {
-            if (path.EndsWith($"{dll}.csproj"))
-            {
-                content = content.Replace($"<Compile Include=\"Assets\\BaseScripts\\{dll}\\Empty.cs\" />", string.Empty);
-                content = content.Replace($"<None Include=\"Assets\\BaseScripts\\{dll}\\{dll}.asmdef\" />", string.Empty);
-                return GenerateCustomProject(path, content, $@"{dll}\**\*.cs");
-            }
+            return GenerateCustomProject(path, content, @"Logic\**\*.cs", @"..\Codes\Base\**\*.cs", @"LogicBase\**\*.cs");
         }
 
         return content;
