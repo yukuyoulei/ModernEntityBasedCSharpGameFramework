@@ -17,6 +17,7 @@ public class OnGenerateCSProjectProcessor : AssetPostprocessor
         }
         if (path.EndsWith("Logic.csproj"))
         {
+            content = content.Replace("<RootNamespace />", "<RootNamespace>MEBCGF</RootNamespace>");
             content = content.Replace("<Compile Include=\"Assets\\ExternalCodes\\Logic\\Empty.cs\" />", string.Empty);
             content = content.Replace("<None Include=\"Assets\\ExternalCodes\\Logic\\Logic.asmdef\" />", string.Empty);
             return GenerateCustomProject(path, content, @"Logic\**\*.cs");

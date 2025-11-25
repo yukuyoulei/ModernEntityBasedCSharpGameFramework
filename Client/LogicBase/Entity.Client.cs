@@ -5,6 +5,9 @@
 //using System;
 //using System.Threading;
 //using System.Threading.Tasks;
+using MEBCGF;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -81,21 +84,21 @@ public partial class Entity
     //        return child;
     //    }
 
-    //    public async Task<T> AddChild<T>(string resourcePath) where T : Entity, new()
-    //    {
-    //        try
-    //        {
-    //            var instanceRequest = await ResourceHelper.InstantiateAsync(resourcePath);
-    //            instanceRequest.gameObject.transform.SetParent(transform, true);
-    //            instanceRequest.gameObject.transform.localPosition = Vector3.zero;
-    //            return AddChild<T>(instanceRequest);
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Log.Error($"AddChild error \r\n{ex}, 资源 {resourcePath}");
-    //            return null;
-    //        }
-    //    }
+    public async Task<T> AddChild<T>(string resourcePath) where T : Entity, new()
+    {
+        try
+        {
+            var instanceRequest = await ResourceHelper.InstantiateAsync(resourcePath);
+            instanceRequest.gameObject.transform.SetParent(transform, true);
+            instanceRequest.gameObject.transform.localPosition = Vector3.zero;
+            return AddChild<T>(instanceRequest);
+        }
+        catch (Exception ex)
+        {
+            Log.Error($"AddChild error \r\n{ex}, 资源 {resourcePath}");
+            return null;
+        }
+    }
 
     //    public T AddChild<T>(Transform resource) where T : Entity, new()
     //    {
@@ -266,8 +269,11 @@ public partial class Entity
     //    {
     //        return await UniTask.WaitUntil(predicate, PlayerLoopTiming.Update, CancellationTokenSource.Token).SuppressCancellationThrow(); ;
     //    }
-
-    protected void ClearAllButtonListeners()
+    protected void OnClearAllButtonListeners()
+    {
+        ClearAllButtonListeners();
+    }
+    partial void ClearAllButtonListeners()
     {
         if (gameObject == null)
             return;

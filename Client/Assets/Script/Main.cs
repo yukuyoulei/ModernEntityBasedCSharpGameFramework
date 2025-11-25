@@ -1,3 +1,4 @@
+using MEBCGF;
 using System;
 using System.IO;
 using System.Reflection;
@@ -22,6 +23,7 @@ public class Main : MonoBehaviour
             Debug.LogError($"Load Logic.dll failed: {www.error}");
             return;
         }
+        
         var a = Assembly.Load(www.bytes);
         var t = a.GetType("MEBCGF.Startup");
         var m = t.GetMethod("Start");

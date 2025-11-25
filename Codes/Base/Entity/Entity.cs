@@ -184,12 +184,12 @@ public partial class Entity
 
         ClearAllButtonListeners();
         UnregisterAllCalls();
-        OnDestroy();
         ClearChildren();
+        OnDestroy();
 
         Parent = null;
     }
-
+    partial void ClearAllButtonListeners();
     public virtual void OnStart()
     {
         isActive = true;

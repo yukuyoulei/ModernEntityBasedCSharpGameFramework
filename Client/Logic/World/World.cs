@@ -1,22 +1,21 @@
-﻿using MEBCGF;
-using System.Threading.Tasks;
-using UnityEngine;
-
-internal class World : Entity
+﻿namespace MEBCGF
 {
-    public World()
+    internal class World : Entity
     {
-        OnStart();
-    }
-    public override void OnStart()
-    {
-        base.OnStart();
-        Log.Debug($"World Started");
-    }
-    public override void OnDestroy()
-    {
-        base.OnDestroy();
-        ClearChildren();
-        Log.Debug($"World Destroyed");
+        public World()
+        {
+            OnStart();
+        }
+        public override void OnStart()
+        {
+            base.OnStart();
+            Log.Debug($"World Started");
+        }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            ClearChildren();
+            Log.Debug($"World Destroyed");
+        }
     }
 }

@@ -10,12 +10,12 @@ using UnityEngine.PlayerLoop;
 
 namespace MEBCGF
 {
-    internal static class Startup
+    public static class Startup
     {
         public static void Start()
         {
             Log.Debug($"Application Start");
-            
+
             InitActions();
 
             InitGame();
@@ -26,6 +26,7 @@ namespace MEBCGF
             Game.world = new();
             Game.world.OnStart();
 
+            _ = Game.world.AddChild<StartComponent>("Start");
         }
 
         private static void InitActions()
