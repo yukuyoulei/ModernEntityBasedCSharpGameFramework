@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2932712718738401535}
   m_Layer: 0
-  m_Name: Start
+  m_Name: LoadingScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

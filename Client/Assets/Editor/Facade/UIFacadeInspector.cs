@@ -14,7 +14,7 @@ using TMPro;
 [CustomEditor(typeof(MonoFacade))]
 public class UIFacadeInspector : Editor
 {
-    string filepath = "Main\\GameLogic\\World\\Battle\\Components\\";
+    string filepath = "..\\Logic\\UI\\";
     int? removeIdx;
     static string targetSubDir;
     

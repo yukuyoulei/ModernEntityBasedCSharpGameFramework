@@ -21,12 +21,20 @@ namespace MEBCGF
             InitGame();
         }
 
-        private static void InitGame()
+        private static async void InitGame()
         {
             Game.world = new();
             Game.world.OnStart();
 
-            _ = Game.world.AddChild<StartComponent>("Start");
+            LoadCanvasRoot();
+
+            var startscene = await Game.world.AddChild<StartSceneComponent>("Prefab/Scene/StartScene");
+            await UIHelper.LoadUI<UILogin>(parent: startscene);
+        }
+
+        private static void LoadCanvasRoot()
+        {
+            Game.world.AddChild<CanvasComponent>(GameObject.Find("CanvasRoot"));
         }
 
         private static void InitActions()

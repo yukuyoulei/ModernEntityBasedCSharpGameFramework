@@ -34,7 +34,22 @@ public class Main : MonoBehaviour
             return null;
         }
         Log.Debug($"Load extra dll {d} success");
-        return AppDomain.CurrentDomain.Load(www.bytes);
+        var dllbytes = www.bytes;
+        byte[] pdfbytes = null;
+#if UNITY_EDITOR
+        d = d.Replace(".dll", ".pdb");
+        www = new WWW(Path.Combine(Application.dataPath, "../", CodeLoader.DllOutputPath, d));
+        tcs = new();
+        success = await tcs.Task;
+        if (!success)
+        {
+            Debug.LogError($"Load {d} failed: {www.error}");
+            return null;
+        }
+        Log.Debug($"Load extra dll {d} success");
+        pdfbytes = www.bytes;
+#endif
+        return AppDomain.CurrentDomain.Load(dllbytes, pdfbytes);
     }
 
     TaskCompletionSource<bool> tcs;

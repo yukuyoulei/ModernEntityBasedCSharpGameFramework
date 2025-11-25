@@ -91,7 +91,7 @@ public partial class Entity
             var instanceRequest = await ResourceHelper.InstantiateAsync(resourcePath);
             instanceRequest.gameObject.transform.SetParent(transform, true);
             instanceRequest.gameObject.transform.localPosition = Vector3.zero;
-            return AddChild<T>(instanceRequest);
+            return AddChild<T>(instanceRequest, true);
         }
         catch (Exception ex)
         {
@@ -105,17 +105,17 @@ public partial class Entity
     //        return AddChild<T>(resource.gameObject);
     //    }
 
-    //    partial void DestroyGameObject()
-    //    {
-    //        if (gameObject != null && gameObject)
-    //        {
-    //            InstanceRequest?.Destroy();
-    //            if (destroyWhenDispose)
-    //                GameObject.Destroy(gameObject);
-    //        }
-    //        InstanceRequest = null;
-    //        gameObject = null;
-    //    }
+    partial void DestroyGameObject()
+    {
+        if (gameObject != null && gameObject)
+        {
+            //InstanceRequest?.Destroy();
+            if (destroyWhenDispose)
+                GameObject.Destroy(gameObject);
+        }
+        //InstanceRequest = null;
+        gameObject = null;
+    }
 
     //    [System.Diagnostics.Conditional("DEBUG")]
     //    public static void LogAssert(bool condition, string message)
